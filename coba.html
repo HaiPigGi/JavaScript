@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jumlah Pilihan</title>
+  </head>
+  <body>
+      <h1>Silahkan Masukkan input data</h1>
+      <label for="textChoices">Masukkan Nama  : </label>
+      <input type="text" placeholder="<Masukkan Nama >" required>
+        <br>
+        <br>
+    <label for="numChoices">Masukkan Jumlah Pilihan : </label>
+    <input type="number" id="numChoices">
+    <button onclick="showChoices()">Tampilkan Pilihan</button>
+    <div id="choices"></div>
+
+    <button onclick="showChoices2() "id="btnRadio1">OK</button>
+    <div id="choicesOk"></div>
+    <div id="drop"></div>
+
+    <script>
+        const radio=document.getElementById("btnRadio1");
+        radio.style.display="none";
+      function showChoices() {
+        var numChoices = document.getElementById("numChoices").value;
+        var choices = "";
+        var pilih= "";
+        var drop="";
+        for (var i = 1; i <= numChoices; i++) {
+          choices += "<p>Pilihan <input placeholder='<Masukkan Pilihan>'" + i + "</p>";
+          pilih+="<p>Pilihan <input type='radio'" + i + "</p>";
+          drop+="<select <option value='pilihan'> Pilihan "+ i + " </option </select";
+        }
+        document.getElementById("choices").innerHTML = choices;
+        radio.style.display="block"
+        radio.addEventListener("click",(e) => {
+          e.preventDefault()
+          document.getElementById("choicesOk").innerHTML=pilih;
+          document.getElementById("drop").innerHTML=drop;
+        
+        })
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <h1 align="center">Silahkan Masukkan input data</h1>
+  <div align="center">
+    <fieldset>
+      <label for="textName">Masukkan Nama  : </label>
+      <input type="text" id="textName" placeholder="Masukkan Nama" required>
+      <br><br>
+      <label for="numChoices">Masukkan Jumlah Pilihan : </label>
+      <input type="number" id="numChoices">
+      <br><br>
+      <button onclick="showChoices()">Tampilkan Pilihan</button>
+      <div id="choices"></div>
+      <br><br>
+      <button id="btnRadio1" onclick="radioBtn()">OK</button>
+      <div id="selections"></div>
+      <br>
+      <button id="layar" onclick="displayData()">Display Data</button>
+      <br>
+      <div id="tampil"></div>
+    </fieldset>
+  </div>
+
+<script>
+  const radio = document.getElementById("btnRadio1");
+  const drop = document.getElementById("drop");
+  const layar=document.getElementById("layar")
+
+  radio.style.display = "none";
+  drop.style.display = "none";
+  layar.style.display="none"
+  
+  function showChoices() {
+    var numChoices = document.getElementById("numChoices").value;
+    var choices = "";
+    var pilih = "";
+    var drop = "";
+    var pilihan =[];
+    var tampil="";
+    for (var i = 1; i <= numChoices; i++) {
+      choices += "<p>Pilihan <input type='text' id='choice" + i + "' placeholder='Masukkan Pilihan'></p>";
+          pilih += "<p><input type='radio' name='selection' value='" + i + "'>Pilihan " + i + "</p>";
+    }
+    document.getElementById("choices").innerHTML = choices;
+    radio.style.display = "block";
+    radio.addEventListener("click",(e) => {
+          e.preventDefault()
+        //  document.getElementById("selections").innerHTML = pilih;
+          layar.style.display="block"
+        })
+  }
+  function radioBtn () {
+    var numChoices = document.getElementById("numChoices").value;
+    var pilihan =[];
+    var pilih="";
+    for (var i = 1; i <= numChoices; i++) {
+        pilihan[i-1]=document.getElementById("choice"+i).value
+        pilih += "<p><input type='radio' name='selection' value='" + pilihan[i-1] + "'>" + pilihan[i-1] + "</p>";
+      }
+      console.log("hai")
+      document.getElementById("selections").innerHTML=pilih;
+    }
+    function displayData() {
+        var name = document.getElementById("textName").value;
+        var selections = document.getElementsByName("selection");
+        var choiceValues = [];
+        for (var i = 0; i < selections.length; i++) {
+          if (selections[i].checked) {
+            var choice = document.getElementById("choice" +i).value;
+            choiceValues.push(choice);
+          }
+        }
+        var data = "<p>Nama: " + name + "</p>";
+      data += "<p>Pilihan: " + choiceValues.join(", ") + "</p>";
+      document.getElementById("tampil").innerHTML = data;
+      }
+</script>
+</body>
+</html>
